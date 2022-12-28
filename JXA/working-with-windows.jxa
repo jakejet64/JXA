@@ -1,0 +1,22 @@
+// retrieve non-background windows in a 2D Array
+let windows =  Application('System Events').processes.whose(
+	{backgroundOnly: {'=': false} }).windows();
+// each 'row' represents the process it was pulled from
+windows.forEach(process => {
+	process.forEach(window => {
+		console.log(window.name());
+	});
+});
+
+// retrieve non-background windows in an Array
+let cleanWindows = Application('System Events').processes.whose(
+	{backgroundOnly: {'=': false} }).windows().reduce((acc, val) => acc.concat(val), []);
+// loop through windows & prints .properties() to console
+cleanWindows.forEach(window => {
+	console.log(window.name());
+
+	let props = window.properties();
+	Object.keys(props).forEach(key => {
+		console.log(`-  ${key}: ${props[key]}`)
+	})
+});
