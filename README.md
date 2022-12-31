@@ -84,3 +84,9 @@ it also goes a long way with keeping Chrome Tabs
 
 >[**Script Debugger** (download page)](https://latenightsw.com/sd8/download/)
 >Most advanced tool there is for this type of work, unfortunately only works with AppleScript & I was much more comfortable working with JXA. Still helpful with debugging, giving you view of all your currnt application data in a tree to play with.
+
+---
+
+# TODO
+
+After shortcuts repo published, pin to profile & clean up my repositories, add skills on LinkedIn
