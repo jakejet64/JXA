@@ -71,6 +71,9 @@ it also goes a long way with keeping Chrome Tabs
 >[Scripting with JXA](https://bru6.de/jxa/#structure-of-the-site)
 >By far the most complete & concise resource that I came across, and trust me, there were a LOT of them. Even goes into JXA vs. AppleScript capabilities.
 
+>[JXA Library](https://jxa-examples.akjems.com/)
+>Awesome compilation of JXA code snippets.
+
 #### Tools
 
 >Apple [**Shortcuts** (user guide)](https://support.apple.com/en-hk/guide/shortcuts-mac/apdf22b0444c/mac)

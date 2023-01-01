@@ -1,0 +1,8 @@
+try {
+	let finder = Application('Finder');
+  finder.activate();
+  var window = finder.Window().make();
+  window.set({visible: true});
+} catch (e) {
+	console.log(e);
+}
