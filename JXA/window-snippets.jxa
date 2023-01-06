@@ -13,8 +13,8 @@ windows.forEach(process => {
 });
 
 // retrieve non-background windows in an Array
-let cleanWindows = Application('System Events').processes.whose(
-	{backgroundOnly: {'=': false} }).windows().reduce((acc, val) => acc.concat(val), []);
+//let cleanWindows = Application('System Events').processes.whose(
+//	{backgroundOnly: {'=': false} }).windows().reduce((acc, val) => acc.concat(val), []);
 
 // resize a window
-window.bounds = {"x":0, "y":0, "width":500, "height":500};
+//window.bounds = {"x":0, "y":0, "width":500, "height":500};
