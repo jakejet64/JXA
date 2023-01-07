@@ -1,5 +1,0 @@
-try {
-	let finder = Application('Finder').activate();
-} catch (e) {
-	console.log(e);
-}

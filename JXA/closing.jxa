@@ -1,0 +1,109 @@
+// closing.jxa - all the snippets I made/adapted for 'ask to persist'
+
+
+
+
+
+
+// takes in list of Brave Apps that have been installed
+function run(input, parameters) {
+
+	let braveApps = input[0].map(app => {
+		let sApp = Application(app);
+		return {
+			name: app,
+			running: sApp.running()
+		};
+	});
+
+	let runningBraveApps = braveApps.filter(app => app.running);
+
+	return runningBraveApps.map(a => a.name);
+}
+// returns the ones that currently have an open window
+
+
+
+
+// takes in nothing
+function run(input, parameters) {
+	let ret = [];
+
+	ps = Application('System Events').processes.whose({backgroundOnly: {'=': false} })();
+
+	ps.forEach(p => {
+    // filter out Brave PWAs
+		if(p.name() != 'app_mode_loader') {
+			ret.push((n => n.slice(0, n.length -4 ))(p.file.name()));
+		}
+	});
+
+	return ret;
+
+}
+// returns a list of non-background apps that are currently open,
+// excluding brave PWAs
+
+
+
+
+
+/*
+
+takes in [itemToPersist1, 2, 3, ..., 'PlaceHolder', runningBraveApp1, 2, 3, ...]
+
+(the placeholder was the simplest way I could find to run
+JXA snippets with multiple lists from within shortcuts)
+
+Quits all open apps that aren't 'backgroundOnly', excluding any itemToPersist
+Quits all runningBraveApp, excluding any itemToPersist
+*/
+/*
+WHY IT HAD TO BE DONE THIS WAY:
+While iterating through processes in system events, all brave PWAs
+are going to be named app_mode_loader. However, the name of the file
+for the process is always going to be the first PWA you opened. So,
+if you were to open 'eBay', 'LinkedIn', and 'Netflix', all three would
+show up as a process 'app_mode_loader', with a file named 'eBay.app'
+
+To get around this, part of 'Ask to Persist' is going to retrieve
+the folder where all of my brave apps are installed, quickly
+check each one to see if it's running, and then pass that list
+as options to the user
+(with all other running (non-bg && non-app_mode_loader) apps)
+*/
+function run(input, parameters) {
+
+	//let ret = [];
+
+	let indexOfPH = input[0].indexOf('PlaceHolder');
+
+	let keepRunning = input[0].slice(0, indexOfPH);
+	let runningBraveApps = input[0].slice(indexOfPH + 1);
+
+	ps = Application('System Events').processes.whose({backgroundOnly: {'=': false} })();
+
+	ps.forEach(p => {
+		if(p.name() != 'app_mode_loader') {
+			let pfName = ((n => n.slice(0, n.length -4 ))(p.file.name()));
+			if(!keepRunning.includes(pfName)) {
+				let app = Application(pfName);
+				app.quit();
+				//ret.push(pfName);
+			}
+		}
+	});
+
+	runningBraveApps.forEach(RBA => {
+		if(!keepRunning.includes(RBA)) {
+			let app = Application(RBA);
+			app.quit();
+			//ret.push(RBA);
+		}
+	});
+
+
+	return 'hello';
+  //return JSON.stringify(ret);
+}
+// no output; just old testing junk

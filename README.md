@@ -45,8 +45,7 @@ My frustration with MacOS Window Management finally got the best of me that day.
 
 ## Extra Resources
 
-```
-Chrome User Pro-tip:
+```Chrome/Brave User Pro-tip:
 
 Have a resource you really like? (or website you frequent)
 
@@ -62,6 +61,10 @@ that I use, not only does it help immensely with
 application shortcuts to everything I could need,
 it also goes a long way with keeping Chrome Tabs
  & Windows to a minimum.
+
+(A much regrettable action down the line...)
+(but hey, all the code to manage those apps
+is all right here!)
 ```
 
 #### Documentation
@@ -90,6 +93,10 @@ it also goes a long way with keeping Chrome Tabs
 
 ---
 
-# TODO
+```
+TODO (just for me)
 
 After shortcuts repo published, pin to profile & clean up my repositories, add skills on LinkedIn
+
+
+```

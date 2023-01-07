@@ -1,0 +1,117 @@
+/*
+  In my time playing around with things, there were a
+  lot of snips that I couldn't quite justify getting rid of.
+
+  However, I was just too lazy to file them.
+
+*/
+
+// trying to learn flutter & Dart at the moment, don't mind me
+const print = input => console.log(input);
+// Want to change it back? CMD + F2 changes all occurences
+
+// retrieve non-background windows in a 2D Array
+let windows =  Application('System Events').processes.whose(
+	{backgroundOnly: {'=': false} }).windows();
+// each 'row' represents the process it was pulled from
+windows.forEach(process => {
+	process.forEach(window => {
+		console.log(window.name());
+		let props = window.properties();
+		Object.keys(props).forEach(key => {
+			console.log(`-  ${key}: ${props[key]}`)
+		});
+	});
+});
+
+// retrieve non-background windows in an Array
+//let cleanWindows = Application('System Events').processes.whose(
+//	{backgroundOnly: {'=': false} }).windows().reduce((acc, val) => acc.concat(val), []);
+
+// resize a window
+window.bounds = {"x":0, "y":0, "width":500, "height":500};
+
+
+
+let whitelist = ['Shortcuts', 'Visual Studio Code', 'Bartender'];
+
+let ps = Application('System Events').processes();
+ps.forEach(p => {
+	let ws = p.windows();
+	if(ws.length > 0) {
+    let pname = (n => n.slice(0, n.length -4 ))(p.file.name());
+    console.log(pname);
+  }
+});
+
+ps = Application('System Events').processes.whose({backgroundOnly: {'=': false} })();
+
+ps.forEach(p => {
+  console.log((n => n.slice(0, n.length -4 ))(p.file.name()));
+});
+
+
+
+
+
+
+
+
+
+
+
+
+let formattedWs = [];
+let ps = Application('System Events').processes();
+ps.forEach(p => {
+	let ws = [...p.windows()];
+	ws.forEach(w => {
+    let formattedW = {
+      file: (n => n.slice(0, n.length -4 ))(p.file.name()),
+      size: w.size(),
+      position: w.position()
+    };
+		print(JSON.stringify(formattedW));
+    formattedWs.push(formattedW);
+	});
+});
+
+// let lc = Application('LeetCode');
+// lc.Window().make();
+
+print('------');
+
+//print(JSON.stringify(formattedWs));
+
+// testing-bg.jxa
+
+print('\nForeground Apps:\n');
+let windows =  Application('System Events').processes.whose(
+	{backgroundOnly: {'=': false} }).windows();
+windows.forEach(process => {
+	process.forEach(window => {
+		print('-  ' + window.name());
+		//let process = window.process();
+		let props = window.properties();
+		Object.keys(props).forEach(key => {
+			if(['position', 'size'].includes(key)) {
+				print(`--        ${key}: ${props[key]}`)
+			}
+		});
+	});
+});
+
+print('\nBackground Apps:\n');
+let bgWindows =  Application('System Events').processes.whose(
+	{backgroundOnly: {'=': true} }).windows();
+bgWindows.forEach(process => {
+	process.forEach(window => {
+		print('-  BGNAME:' + window.name());
+		let props = window.properties();
+		Object.keys(props).forEach(key => {
+			if(['position', 'size', 'name'].includes(key)) {
+				print(`-  ${key}: ${props[key]}`);
+			}
+		});
+	});
+});

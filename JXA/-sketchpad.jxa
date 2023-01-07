@@ -1,0 +1,8 @@
+// -sketchpad.jxa: where I ran code as I built all of this out
+
+/* PWAs (PITA Web Apps)
+  if a Brave > Window > Title = ""  -> It's an App
+  Brave > Window > Tab > Name is the ending of PWA > Window > Name, that tab is the app
+  PWA > Window > Name:
+    APPNAME + ' - ' + Browser>Window>Tab>Name
+*/
